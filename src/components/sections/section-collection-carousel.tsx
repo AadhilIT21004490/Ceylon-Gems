@@ -36,7 +36,7 @@ const SectionCollectionCarousel = ({
     slidesToScroll: 'auto',
   },
   className,
-  sectonTitle = 'Find your own <span data-slot="italic">unique style,</span> and thousands <br /> of brands.',
+  sectonTitle = 'Find your own <span data-slot="italic">unique stone,</span> and thousands <br /> of Variety.',
   groupCollections,
 }: SectionCollectionCarouselProps) => {
   // Tạo ref để truy cập các phương thức của carousel

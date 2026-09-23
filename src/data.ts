@@ -733,13 +733,13 @@ export async function getFashionGroupCollections() {
       collections,
     },
     {
-      title: 'Accessories',
+      title: 'Traditional Stones',
       handle: 'accessories',
       description: 'lorem ipsum',
       collections,
     },
     {
-      title: 'Footwear',
+      title: 'Abroad Stones',
       handle: 'footwear',
       description: 'lorem ipsum',
       collections,

@@ -12,7 +12,7 @@ interface HeroSection3Props {
 const HeroSection3 = ({ className }: HeroSection3Props) => {
   return (
     <div className="relative flex min-h-dvh w-full">
-      <Image src={'/images/fashion/hero-1.png'} alt="hero" className="object-cover object-center" fill priority />
+      <Image src={'/images/fashion/hro.jpg'} alt="hero" className="object-cover object-center" fill priority />
       <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative container flex flex-1 pt-20 pb-36">
