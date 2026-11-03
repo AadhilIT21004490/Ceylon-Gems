@@ -53,7 +53,7 @@ const SectionCollectionCarousel = ({
 
         <div className="flex-1/3">
           <Text>get 15% discount on your first order!</Text>
-          <Button outline href={'/collections/all'} className="mt-4">
+          <Button outline href={'/collections/page-style-2/all'} className="mt-4">
             SHOP NOW
           </Button>
         </div>

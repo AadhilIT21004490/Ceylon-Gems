@@ -55,7 +55,6 @@ const FeatureSection3 = ({
   })
   const [emblaRef2] = useEmblaCarousel({
     slidesToScroll: 'auto',
-    startIndex: 9,
   })
 
   return (
@@ -64,8 +63,8 @@ const FeatureSection3 = ({
         {/* Heading */}
         <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
           <div className="flex-1/3">
-            <Button href={'/collections/all'} outline>
-              Our products
+            <Button href={'/collections/page-style-2/all'} outline>
+              Our stones
             </Button>
           </div>
           <Heading className="flex-2/3" bigger dangerouslySetInnerHTML={{ __html: heading }} />
@@ -89,7 +88,7 @@ const FeatureSection3 = ({
             {/* Heading */}
             <div className="flex items-end justify-between gap-4">
               <Heading dangerouslySetInnerHTML={{ __html: collection1.title }}></Heading>
-              <ButtonCircle href={'/collections/all'}>
+              <ButtonCircle href={'/collections/page-style-2/all'}>
                 <ArrowUpRightIcon className="h-4 w-4 text-zinc-50" />
               </ButtonCircle>
             </div>
@@ -121,8 +120,8 @@ const FeatureSection3 = ({
             {/* DESCRIPTION */}
             <div className="flex items-end justify-between gap-4">
               <Text className="max-w-sm">{collection1.desciption}</Text>
-              <Button outline href={'#'}>
-                SIZE GUIDE
+              <Button outline href={'/collections/page-style-2/all'}>
+                VIEW STONES
               </Button>
             </div>
           </div>
@@ -134,7 +133,7 @@ const FeatureSection3 = ({
             {/* Heading */}
             <div className="flex items-end justify-between gap-4">
               <Heading dangerouslySetInnerHTML={{ __html: collection2.title }}></Heading>
-              <ButtonCircle href={'/collections/all'}>
+              <ButtonCircle href={'/collections/page-style-2/all'}>
                 <ArrowUpRightIcon className="h-4 w-4 text-zinc-50" />
               </ButtonCircle>
             </div>
@@ -166,8 +165,8 @@ const FeatureSection3 = ({
             {/* DESCRIPTION */}
             <div className="flex items-end justify-between gap-4">
               <Text className="max-w-sm">{collection2.desciption}</Text>
-              <Button outline href={'#'}>
-                SIZE GUIDE
+              <Button outline href={'/collections/page-style-2/all'}>
+                VIEW STONES
               </Button>
             </div>
           </div>

@@ -1,18 +1,20 @@
 'use client'
 
 import { Button } from '@/components/button'
+import CarouselCollections from '@/components/carousel-collections'
 import CarouselProducts from '@/components/carousel-products'
 import { Heading } from '@/components/heading'
 import NextPrevButtons from '@/components/next-prev-btns'
 import { Text } from '@/components/text'
 import { VectorArrowDown } from '@/components/vector-arrow-down'
-import { TProductItem } from '@/data'
+import { TCollection, TProductItem } from '@/data'
 import { useCarouselArrowButtons } from '@/hooks/use-carousel-arrow-buttons'
 import type { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
 interface SectionProductCarouselProps {
   products?: TProductItem[]
+  collections?: TCollection[]
   emblaOptions?: EmblaOptionsType
   className?: string
   collectionHandle?: string
@@ -22,6 +24,7 @@ interface SectionProductCarouselProps {
 
 const SectionProductCarousel = ({
   products,
+  collections,
   emblaOptions = {
     slidesToScroll: 'auto',
   },
@@ -38,7 +41,7 @@ const SectionProductCarousel = ({
   return (
     <div className={className}>
       <div className="flex flex-wrap items-center justify-between gap-6">
-        <Button outline href={collectionHandle ? `/collections/${collectionHandle}` : '#'}>
+        <Button outline href={collectionHandle ? `/collections/page-style-2/${collectionHandle}` : '#'}>
           EXPLORE COLLECTION
         </Button>
 
@@ -63,7 +66,11 @@ const SectionProductCarousel = ({
         />
       </div>
 
-      {products ? <CarouselProducts className="mt-16" emblaRef={emblaRef} products={products} /> : null}
+      {collections ? (
+        <CarouselCollections className="mt-16" emblaRef={emblaRef} collections={collections} />
+      ) : products ? (
+        <CarouselProducts className="mt-16" emblaRef={emblaRef} products={products} />
+      ) : null}
     </div>
   )
 }

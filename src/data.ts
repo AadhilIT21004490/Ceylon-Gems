@@ -706,15 +706,6 @@ export async function getFashionCollections() {
       image: '/images/fashion/blue.jpg',
       products: products.slice(1, 6),
     },
-    {
-      id: '5',
-      title: 'Shoes',
-      handle: 'shoes',
-      description: 'Trendy shoes for every occasion, from casual to formal. Find your perfect pair.',
-      updatedAt: '2025-05-06T10:00:00-04:00',
-      image: '/images/fashion/shoes.jpg',
-      products: products.slice(3, 8),
-    },
   ]
 }
 export async function getFashionGroupCollections() {
@@ -729,19 +720,19 @@ export async function getFashionGroupCollections() {
     {
       title: 'Best Selling',
       handle: 'best-selling',
-      description: 'lorem ipsum',
+      description: 'The gemstones our customers love most, chosen for their colour, clarity and brilliance.',
       collections,
     },
     {
       title: 'Traditional Stones',
       handle: 'accessories',
-      description: 'lorem ipsum',
+      description: 'Classic gemstones treasured for generations, each one selected for its natural beauty.',
       collections,
     },
     {
       title: 'Abroad Stones',
       handle: 'footwear',
-      description: 'lorem ipsum',
+      description: 'Remarkable gemstones sourced from around the world to complement our collection.',
       collections,
     },
     {

@@ -23,7 +23,7 @@ const HeroSection2 = ({ className }: HeroSection2Props) => {
               Unreservedly honest products that truly work, and be kind to skin and the planet – no exceptions!
             </Text>
             <Button
-              href={'/collections/all'}
+              href={'/collections/page-style-2/all'}
               color="white"
               className="mt-16 w-full max-w-4xl cursor-pointer !border-white py-5 font-medium tracking-wide underline sm:py-6"
             >

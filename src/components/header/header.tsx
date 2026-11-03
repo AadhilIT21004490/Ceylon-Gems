@@ -24,9 +24,8 @@ const mega_menus = [
     name: 'Collections',
     href: '#',
     chidren: [
-      { name: 'All collections 1', href: '/collections/all' },
-      { name: 'All collections 2', href: '/collections/page-style-2/all' },
-      { name: 'Collection page', href: '/collections/face-wash' },
+      { name: 'All collections', href: '/collections/page-style-2/all' },
+      { name: 'Collection page', href: '/collections/page-style-2/face-wash' },
       { name: 'Product Detail', href: '/products/hydrating-sheet-mask' },
       { name: 'Product Detail 2', href: '/products/page-style-3/leather-tote-bag' },
       { name: 'Product Detail 3', href: '/products/page-style-2/printed-chiffon-hijab' },

@@ -31,7 +31,7 @@ export function ProductForm({ product }: { product: TProductItem }) {
     {
       id: 2,
       name: collection.title,
-      href: '/collections/all',
+      href: '/collections/page-style-2/all',
     },
   ]
   //

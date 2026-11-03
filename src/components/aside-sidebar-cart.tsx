@@ -53,7 +53,7 @@ const AsideSidebarCart = async ({ className = '' }: Props) => {
             <div className="mt-6 flex justify-center text-center text-sm text-zinc-500">
               <Text className="text-xs">
                 or{' '}
-                <TextLink href={'/collections/all'} className="text-xs font-medium text-zinc-900 uppercase">
+                <TextLink href={'/collections/page-style-2/all'} className="text-xs font-medium text-zinc-900 uppercase">
                   Continue Shopping<span aria-hidden="true"> →</span>
                 </TextLink>
               </Text>

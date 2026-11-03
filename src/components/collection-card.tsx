@@ -46,7 +46,7 @@ export default function CollectionCard({
         ) : null}
       </div>
 
-      <TextLink href={`/collections/${handle}`}>
+      <TextLink href={`/collections/page-style-2/${handle}`}>
         <span className="absolute inset-0"></span>
         <span className="sr-only">{title}</span>
       </TextLink>

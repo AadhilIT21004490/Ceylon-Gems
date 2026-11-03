@@ -4,7 +4,7 @@ import FeatureSection3 from '@/components/sections/feature-section-3'
 import HeroSection3 from '@/components/sections/hero-section-3'
 import SectionCollectionCarousel from '@/components/sections/section-collection-carousel'
 import SectionProductCarousel from '@/components/sections/section-product-carousel'
-import { getCollections, getGroupCollections } from '@/data'
+import { getGroupCollections } from '@/data'
 import clsx from 'clsx'
 import { Metadata } from 'next'
 
@@ -15,7 +15,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  let collections = await getCollections('fashion')
   let groupCollections = await getGroupCollections('fashion')
 
   return (
@@ -24,50 +23,47 @@ export default async function Home() {
 
       <SectionCollectionCarousel className="container mt-20 sm:mt-28 lg:mt-28" groupCollections={groupCollections} />
 
-      {collections
-        ?.filter((_, i) => i < 3)
-        .map((collection, index) => (
-          <SectionProductCarousel
-            key={index}
-            className={clsx('container', index === 0 ? 'mt-44' : 'mt-36')}
-            products={collection?.products}
-            collectionTitle={collection?.title}
-            collectionHandle={collection?.handle}
-            collectionDescription={collection?.description}
-          />
-        ))}
+      {groupCollections?.slice(1, 4).map((group, index) => (
+        <SectionProductCarousel
+          key={group.handle}
+          className={clsx('container', index === 0 ? 'mt-44' : 'mt-36')}
+          collections={group.collections}
+          collectionTitle={group.title}
+          collectionHandle="all"
+          collectionDescription={group.description}
+        />
+      ))}
 
       <FeatureSection2
         className="container mt-20 sm:mt-28 lg:mt-32"
         variant="up"
-        heading={`Culture Is <span data-slot="italic">More</span> Than a Set <span data-slot="italic">Of</span> Documents`}
+        heading={`Every Stone Is <span data-slot="italic">Chosen</span> With <span data-slot="italic">Care</span>`}
         faqs={[
           {
-            question: 'Radical Transparency',
+            question: 'Authenticity You Can Trust',
             answer:
-              "No black boxes, nothing to hide, we disclose our full formulas, so you will never have to guess what's in it and how much.",
+              'Every gemstone is inspected before it is listed, and we clearly describe its type, origin and any known treatments.',
           },
           {
-            question: 'Clean, Beyond Reproach',
+            question: 'Colour, Clarity & Cut',
             answer:
-              'We are committed to using only the safest, most effective ingredients, and we never compromise on quality.',
+              'We look for lively colour, good clarity and a well-proportioned cut that brings out the natural brilliance of each stone.',
           },
           {
-            question: 'Conscious & Responsible',
+            question: 'Rooted in Ceylon Heritage',
             answer:
-              'We are committed to using only the safest, most effective ingredients, and we never compromise on quality.',
+              'Sri Lanka, once known as Ceylon, has been celebrated for its gemstones for centuries. That heritage guides every stone we offer.',
           },
           {
-            question: 'Potent & Multi Tasking',
-            answer:
-              'We are committed to using only the safest, most effective ingredients, and we never compromise on quality.',
+            question: 'Careful Packing & Delivery',
+            answer: 'Each stone is securely packed and carefully handled so it reaches you in perfect condition.',
           },
         ]}
         image={{
-          src: '/images/fashion/feature-1.png',
-          width: 644,
-          height: 653,
-          alt: 'fashion-feature-1',
+          src: '/images/fashion/tsavo.jpg',
+          width: 1995,
+          height: 1995,
+          alt: 'Green tsavorite gemstone held in tweezers',
         }}
       />
 
@@ -77,26 +73,21 @@ export default async function Home() {
 
       <FeatureSection3
         className="mt-20 sm:mt-28 lg:mt-32"
-        heading={`Explore our exclusive designs, blending luxury with <span data-slot="italic">timeless elegance.</span>`}
+        heading={`Explore our rare gemstones, shaped by nature and chosen for their <span data-slot="italic">timeless beauty.</span>`}
         collection1={{
-          title: 'NYC collection <br /><span data-slot="italic">edition.</span>',
-          desciption: 'Discover our exclusive collection of printed modal scarves, designed to elevate your style',
+          title: 'A world of <br /><span data-slot="italic">colour.</span>',
+          desciption: 'From deep blue sapphire to rich red, green and orange garnets, find the colour that speaks to you.',
           images: [
-            '/images/fashion/newyork.jpg',
-            '/images/fashion/newyork-1.jpg',
-            '/images/fashion/newyork-2.jpg',
-            '/images/fashion/newyork-3.jpg',
+            '/images/fashion/blue.jpg',
+            '/images/fashion/pyrope.jpg',
+            '/images/fashion/tsavo.jpg',
+            '/images/fashion/spess.jpg',
           ],
         }}
         collection2={{
-          title: 'The artist´s <br /> <span data-slot="italic">wardrobe.</span>',
-          desciption: 'Discover our exclusive collection of printed modal scarves, designed to elevate your style',
-          images: [
-            '/images/fashion/NewYork-3.png',
-            '/images/fashion/p1-1.jpg',
-            '/images/fashion/p2-1.jpg',
-            '/images/fashion/p3-1.jpg',
-          ],
+          title: 'The Garnet <br /> <span data-slot="italic">family.</span>',
+          desciption: 'From the fiery red of pyrope to vivid green tsavorite and glowing orange spessartine.',
+          images: ['/images/fashion/pyrope.jpg', '/images/fashion/tsavo.jpg', '/images/fashion/spess.jpg'],
         }}
       />
     </div>

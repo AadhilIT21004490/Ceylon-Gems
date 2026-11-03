@@ -38,7 +38,7 @@ const FeatureSection1 = ({
     alt: 'feature-1-2',
   },
   buttonText = 'EXPLORE PRODUCTS',
-  buttonLink = '/collections/all',
+  buttonLink = '/collections/page-style-2/all',
 }: FeatureSection1Props) => {
   return (
     <div className={clsx('flex flex-col justify-between gap-8 lg:flex-row lg:gap-6 xl:gap-2.5', className)}>

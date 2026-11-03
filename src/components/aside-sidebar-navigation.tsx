@@ -48,7 +48,7 @@ const AsideSidebarNavigation = ({ className }: Props) => {
               </Disclosure>
 
               <TextLink
-                href="/collections/all"
+                href="/collections/page-style-2/all"
                 className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-medium hover:bg-zinc-50"
               >
                 Shop

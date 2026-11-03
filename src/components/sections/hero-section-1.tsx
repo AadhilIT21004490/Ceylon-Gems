@@ -50,7 +50,7 @@ const HeroSection1 = ({ className }: HeroSection1Props) => {
           <Text className="max-w-xs">sophisticated but timeless design.</Text>
         </div>
       </div>
-      <ButtonLargeWithIcon href="/collections/all">explore all products</ButtonLargeWithIcon>
+      <ButtonLargeWithIcon href="/collections/page-style-2/all">explore all products</ButtonLargeWithIcon>
     </div>
   )
 }

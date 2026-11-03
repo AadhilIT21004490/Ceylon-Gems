@@ -123,7 +123,7 @@ export default async function Page() {
             </dl>
 
             <div className="mt-16 border-t border-zinc-200 py-6 text-right">
-              <Link href="/collections/all" className="text-sm font-medium text-zinc-950 uppercase">
+              <Link href="/collections/page-style-2/all" className="text-sm font-medium text-zinc-950 uppercase">
                 Continue Shopping
                 <span aria-hidden="true"> &rarr;</span>
               </Link>
