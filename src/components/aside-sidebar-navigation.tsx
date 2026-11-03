@@ -7,9 +7,7 @@ import Aside from './aside'
 import { Text, TextLink } from './text'
 
 const demo_pages_menu = [
-  { name: 'Home skincare', href: '/' },
-  { name: 'Home fashion', href: '/home-fashion' },
-  { name: 'Home hjiab', href: '/home-hjiab' },
+  { name: 'Home', href: '/' },
   { name: 'Coming soon', href: '#' },
 ]
 
