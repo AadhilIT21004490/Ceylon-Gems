@@ -21,22 +21,11 @@ const playfair_display = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Bitpan',
-    default: 'Bitpan',
+    template: '%s - Ceylon Lueur',
+    default: 'Ceylon Lueur',
   },
-  description:
-    'Bitpan is a modern and elegant template for Next.js, Tailwind CSS, and TypeScript. It is designed to be simple and easy to use, with a focus on performance and accessibility.',
-  keywords: [
-    'Next.js',
-    'Tailwind CSS',
-    'TypeScript',
-    'Bipan',
-    'Headless UI',
-    'Fashion',
-    'Hijab',
-    'Skincare',
-    'E-commerce',
-  ],
+  description: 'Discover natural gemstones at Ceylon Lueur, with carat, cut, origin and treatment listed for every stone.',
+  keywords: ['Ceylon Lueur', 'Gemstones', 'Sapphire', 'Garnet', 'Tsavorite', 'Spessartine', 'Natural gemstones'],
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

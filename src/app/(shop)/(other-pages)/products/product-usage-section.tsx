@@ -7,23 +7,20 @@ import Image from 'next/image'
 
 const demo_faqs = [
   {
-    question: 'Hand Wash Preferred',
-    answer:
-      ' Maximize durability and maintain softness by hand washing our modal hijabs in warm water and light dish soap. <br /> <br /> Never add your hijabs to the washing machine or mix with other items. ',
+    question: 'Everyday Cleaning',
+    answer: 'Clean your stone with lukewarm soapy water and a soft brush, then rinse it and dry it with a soft cloth.',
   },
   {
-    question: 'Air-Dry for Longevity',
-    answer:
-      'Preserve the integrity of our TENCEL™ Modal hijabs by air-drying; avoid tumble dryers to prevent shrinkage.',
+    question: 'Avoid Harsh Chemicals',
+    answer: 'Keep gemstones away from household cleaners, chlorine and cosmetics, which can damage stones and settings.',
   },
   {
-    question: 'Low-Temperature Ironing & Steaming',
-    answer: 'Maintain the pristine condition of our Modal hijabs with gentle ironing or steaming to remove wrinkles.',
+    question: 'Store Separately',
+    answer: 'Harder stones can scratch softer ones. Keep each gemstone in its own soft pouch or lined compartment.',
   },
   {
-    question: 'Styling',
-    answer:
-      'Use a hair straightening tool on medium heat to straighten the front seams of the hijab to frame the hijab nicely around your face , resulting in a gorgeous draping modal hijab style.',
+    question: 'Ultrasonic & Steam Cleaners',
+    answer: 'These are not safe for every gemstone or treatment. Please ask a jeweller before using them.',
   },
 ]
 

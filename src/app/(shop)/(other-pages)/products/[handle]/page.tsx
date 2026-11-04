@@ -2,14 +2,7 @@ import { Divider } from '@/components/divider'
 import { Heading } from '@/components/heading'
 import ProductCardHorizontal from '@/components/product-card-horizontal'
 import { Text } from '@/components/text'
-import {
-  getFashionProducts,
-  getHijabProducts,
-  getProductByHandle,
-  getProductReviews,
-  getSkincareProducts,
-  TProductItem,
-} from '@/data'
+import { getGemProducts, getProductByHandle } from '@/data'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import clsx from 'clsx'
 import { Metadata } from 'next'
@@ -20,16 +13,15 @@ import ProductFaqsSection from '../product-faqs-section'
 import { ProductForm } from '../product-form'
 import { ProductGallery } from '../product-gallery'
 import ProductRelatedSection from '../product-related-section'
-import ProductReviewSection from '../product-reviews-section'
 import ProductUsageSection from '../product-usage-section'
 
 export async function generateMetadata({ params }: { params: Promise<{ handle: string }> }): Promise<Metadata> {
   const { handle } = await params
   const product = await getProductByHandle(handle)
-  if (!product) {
+  if (!product?.gem) {
     return {
-      title: 'Product not found',
-      description: 'Product not found',
+      title: 'Stone not found',
+      description: 'The stone you are looking for does not exist.',
     }
   }
 
@@ -37,27 +29,20 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
   return { title, description }
 }
 
+const tabs = ['About', 'Gem care', 'FAQs']
+
 export default async function Product({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = await params
   const product = await getProductByHandle(handle)
-  if (!product?.id) {
+  if (!product?.gem) {
     return notFound()
   }
 
-  // for demo product. you need to change for the yourself
-  let otherProducts = [] as TProductItem[]
-  if (product?.collections[0].handle === 'luxury-fashion') {
-    otherProducts = await getFashionProducts()
-  } else if (product?.collections[0].handle === 'skincare-essentials') {
-    otherProducts = await getSkincareProducts()
-  } else {
-    otherProducts = await getHijabProducts()
-  }
-  const combineProduct = otherProducts?.[1]
-  const relatedProducts = otherProducts?.slice(1, 6)
-  const productReviews = await getProductReviews()
-
-  const { images, description } = product
+  const otherStones = (await getGemProducts()).filter((item) => item.id !== product.id)
+  const pairedStone = otherStones[0]
+  const { images, description, title } = product
+  const careImage = otherStones[0]?.images[0]
+  const faqImage = otherStones[1]?.images[0]
 
   return (
     <div className={clsx('product-page relative space-y-12 sm:space-y-16')}>
@@ -75,13 +60,13 @@ export default async function Product({ params }: { params: Promise<{ handle: st
           {/* Product Details */}
           <div className="w-full pt-10 lg:w-1/2 lg:pt-16 lg:pl-10 xl:pl-14 2xl:pl-16">
             <div className="sticky top-16">
-              {/* Heading, Price, Options,...  */}
+              {/* Heading, Price, Specifications,...  */}
               <ProductForm product={product} />
 
-              {combineProduct ? (
+              {pairedStone ? (
                 <div className="mt-10 rounded-lg bg-zinc-100 p-5">
-                  <Text className="mb-3 font-semibold">PAIR IT WITH</Text>
-                  <ProductCardHorizontal product={combineProduct} />
+                  <Text className="mb-3 font-semibold">You may also like</Text>
+                  <ProductCardHorizontal product={pairedStone} />
                 </div>
               ) : null}
 
@@ -92,55 +77,41 @@ export default async function Product({ params }: { params: Promise<{ handle: st
 
         <Divider className="my-16 sm:my-24 lg:my-28" />
 
-        {/* THE CONTENT OF PRODUCT  */}
+        {/* THE CONTENT OF THE STONE  */}
         <Heading bigger className="text-center">
           <span data-slot="italic">all about the</span> <br />
-          <span>PRODUCT</span>
+          <span>STONE</span>
         </Heading>
 
         {/* MAIN TAB GROUP */}
         <TabGroup className="mt-14 lg:mt-16 xl:mt-20">
           <TabList className="flex w-full justify-center gap-4 rounded-full bg-zinc-50 p-1">
-            <Tab className="w-full rounded-full focus-visible:outline-none data-selected:bg-zinc-900 data-selected:text-white">
-              <Text className="py-4">About</Text>
-            </Tab>
-            <Tab className="w-full rounded-full focus-visible:outline-none data-selected:bg-zinc-900 data-selected:text-white">
-              <Text className="py-4">Reviews</Text>
-            </Tab>
-            <Tab className="w-full rounded-full focus-visible:outline-none data-selected:bg-zinc-900 data-selected:text-white">
-              <Text className="py-4">Benefits</Text>
-            </Tab>
-            <Tab className="w-full rounded-full focus-visible:outline-none data-selected:bg-zinc-900 data-selected:text-white">
-              <Text className="py-4">Faqs</Text>
-            </Tab>
+            {tabs.map((tab) => (
+              <Tab
+                key={tab}
+                className="w-full rounded-full focus-visible:outline-none data-selected:bg-zinc-900 data-selected:text-white"
+              >
+                <Text className="py-4">{tab}</Text>
+              </Tab>
+            ))}
           </TabList>
           <TabPanels className="mt-10 lg:mt-16">
             <TabPanel>
-              <ProductDetailContent
-                content={description}
-                imageSrc={
-                  product?.collections[0].handle === 'skincare-essentials'
-                    ? '/images/skincare/feature-1.webp'
-                    : '/images/fashion/feature-1.png'
-                }
-              />
+              <ProductDetailContent content={description} imageSrc={images[0].src} imageAlt={images[0].alt} />
             </TabPanel>
             <TabPanel>
-              <ProductReviewSection reviews={productReviews} />
+              <ProductUsageSection imageSrc={careImage?.src ?? images[0].src} imageAlt={careImage?.alt ?? title} />
             </TabPanel>
             <TabPanel>
-              <ProductUsageSection imageSrc="/images/skincare/feature-3.png" />
-            </TabPanel>
-            <TabPanel>
-              <ProductFaqsSection imageSrc="/images/skincare/hero.png" />
+              <ProductFaqsSection imageSrc={faqImage?.src ?? images[0].src} imageAlt={faqImage?.alt ?? title} />
             </TabPanel>
           </TabPanels>
         </TabGroup>
 
         <Divider className="my-16 sm:my-24 lg:my-28" />
 
-        {/* RELATED PRODUCT */}
-        {relatedProducts ? <ProductRelatedSection products={relatedProducts} /> : null}
+        {/* RELATED STONES */}
+        <ProductRelatedSection products={otherStones} />
       </main>
     </div>
   )

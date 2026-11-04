@@ -1,5 +1,5 @@
 import { Logo } from '@/app/logo'
-import { getSkincareCollections } from '@/data'
+import { getFashionCollections } from '@/data'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { TextLink } from '../text'
@@ -10,48 +10,39 @@ import MegaMenuPopover, { MegaMenuPopoverProps } from './mega-menu-popover'
 import SearchIconPopover from './search-icon-popover'
 import UserIconPopover from './user-icon-popover'
 
-const demo_pages_menu = [
-  { name: 'Home', href: '/' },
-  { name: 'Coming soon', href: '#' },
+const stone_menu = [
+  { name: 'All gemstones', href: '/collections/page-style-2/all' },
+  { name: 'Blue sapphire', href: '/collections/page-style-2/blue-sapphire' },
+  { name: 'Pyrope garnet', href: '/collections/page-style-2/pyrope-garnet' },
+  { name: 'Tsavorite', href: '/collections/page-style-2/tsavorite' },
+  { name: 'Spessartine', href: '/collections/page-style-2/spessartine' },
 ]
-const mega_menus = [
-  {
-    name: 'Demo pages',
-    href: '#',
-    chidren: demo_pages_menu,
-  },
-  {
-    name: 'Collections',
-    href: '#',
-    chidren: [
-      { name: 'All collections', href: '/collections/page-style-2/all' },
-      { name: 'Collection page', href: '/collections/page-style-2/face-wash' },
-      { name: 'Product Detail', href: '/products/hydrating-sheet-mask' },
-      { name: 'Product Detail 2', href: '/products/page-style-3/leather-tote-bag' },
-      { name: 'Product Detail 3', href: '/products/page-style-2/printed-chiffon-hijab' },
-    ],
-  },
-  {
-    name: "What's new",
-    href: '#',
-    chidren: [
-      { name: 'Contact us', href: '/contact' },
-      { name: 'About us', href: '/about-us' },
-      { name: 'Journal / Blog', href: '/blog' },
-      { name: 'Login / Sign up', href: '/login' },
-      { name: 'Shopping Cart', href: '/cart' },
-      { name: 'Orders', href: '/orders' },
-    ],
-  },
-]
-
-const demo_checkout_menu = [
+const account_menu = [
   { name: 'Login / Sign up', href: '/login' },
   { name: 'Cart', href: '/cart' },
   { name: 'Checkout', href: '/checkout' },
-  { name: 'Order successful', href: '/order-successful' },
   { name: 'Orders', href: '/orders' },
-  { name: 'Orders Detail', href: '/orders/4657' },
+]
+const mega_menus = [
+  {
+    name: 'Gemstones',
+    href: '#',
+    chidren: stone_menu,
+  },
+  {
+    name: 'Your account',
+    href: '#',
+    chidren: account_menu,
+  },
+  {
+    name: 'Company',
+    href: '#',
+    chidren: [
+      { name: 'About us', href: '/about-us' },
+      { name: 'Contact us', href: '/contact' },
+      { name: 'Journal', href: '/blog' },
+    ],
+  },
 ]
 
 interface HeaderProps {
@@ -62,7 +53,7 @@ interface HeaderProps {
 }
 
 const Header = async ({ className, hasBottomBorder = true, variant = 'default', megamenuVariant }: HeaderProps) => {
-  const collections = await getSkincareCollections()
+  const collections = await getFashionCollections()
   const featuredCollections = collections.slice(0, 3) // Get 3 collections
 
   return (
@@ -86,7 +77,7 @@ const Header = async ({ className, hasBottomBorder = true, variant = 'default', 
           {/* LEFT LOGO */}
           <div className="flex lg:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Ceylon Lueur</span>
               <Logo />
             </Link>
           </div>
@@ -94,14 +85,14 @@ const Header = async ({ className, hasBottomBorder = true, variant = 'default', 
           {/* MAIN CENTER MENUS */}
           <div className="hidden lg:flex lg:gap-x-8">
             {/* DROPDOWN */}
-            <DropdownMenuPopover dropdownMenu={demo_pages_menu}>Demo pages</DropdownMenuPopover>
+            <DropdownMenuPopover dropdownMenu={stone_menu}>Gemstones</DropdownMenuPopover>
 
             {/* MEGA MENU */}
             <MegaMenuPopover
               megamenu={mega_menus}
               rightImage={{
-                src: '/images/hijab/feature-1-2.png',
-                alt: 'Featured product',
+                src: '/images/fashion/blue.jpg',
+                alt: 'Blue sapphire',
               }}
               featuredCollections={featuredCollections}
               variant={megamenuVariant}
@@ -111,7 +102,7 @@ const Header = async ({ className, hasBottomBorder = true, variant = 'default', 
 
             {/* TEXT LINKS */}
             <TextLink href="/collections/page-style-2/all">Shop</TextLink>
-            <DropdownMenuPopover dropdownMenu={demo_checkout_menu}>Checkout</DropdownMenuPopover>
+            <DropdownMenuPopover dropdownMenu={account_menu}>Account</DropdownMenuPopover>
           </div>
 
           {/* RIGHT ICON BUTTONS */}

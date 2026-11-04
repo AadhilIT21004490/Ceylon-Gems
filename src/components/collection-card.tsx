@@ -35,12 +35,12 @@ export default function CollectionCard({
       </div>
 
       <div className="absolute inset-x-4 bottom-4 flex items-center justify-center gap-0.5">
-        <div className="flex h-11 grow items-center justify-center rounded-full bg-white px-5 text-zinc-900">
+        <div className="flex h-11 grow items-center justify-center rounded-full bg-white px-5 text-zinc-900 ring-1 ring-zinc-200">
           <Text className="leading-none">{title}</Text>
         </div>
 
         {showArrow ? (
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-zinc-900">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-zinc-900 ring-1 ring-zinc-200">
             <ArrowUpRightIcon className="h-4 w-4" />
           </div>
         ) : null}

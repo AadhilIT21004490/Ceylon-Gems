@@ -1,18 +1,12 @@
 'use client'
 
 import { Text, TextLink } from '@/components/text'
+import { gemSortOptions } from '@/gem-filters'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ArrowDown01Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
-
-const sortOptions = [
-  { name: 'Most Popular', href: '#' },
-  { name: 'Best Rating', href: '#' },
-  { name: 'Newest', href: '#' },
-  { name: 'Price: Low to High', href: '#' },
-  { name: 'Price: High to Low', href: '#' },
-]
+import { usePathname, useSearchParams } from 'next/navigation'
 
 interface ProductSortDropdownProps {
   className?: string
@@ -20,6 +14,17 @@ interface ProductSortDropdownProps {
 }
 
 const ProductSortDropdown = ({ className, align = 'left' }: ProductSortDropdownProps) => {
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const getHref = (sort: string) => {
+    const params = new URLSearchParams(searchParams)
+    if (sort) params.set('sort', sort)
+    else params.delete('sort')
+    const query = params.toString()
+    return query ? `${pathname}?${query}` : pathname
+  }
+
   return (
     <div className={className}>
       <Menu as="div" className="relative inline-block text-left">
@@ -46,13 +51,14 @@ const ProductSortDropdown = ({ className, align = 'left' }: ProductSortDropdownP
           )}
         >
           <div className="py-1">
-            {sortOptions.map((option) => (
-              <MenuItem key={option.name}>
+            {gemSortOptions.map((option) => (
+              <MenuItem key={option.value}>
                 <TextLink
-                  href={option.href}
+                  href={getHref(option.value)}
+                  scroll={false}
                   className="block px-4 py-1.5 text-zinc-900 data-focus:bg-zinc-100 data-focus:outline-hidden"
                 >
-                  {option.name}
+                  {option.label}
                 </TextLink>
               </MenuItem>
             ))}

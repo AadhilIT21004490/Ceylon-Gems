@@ -5,9 +5,8 @@ import Breadcrumb from '@/components/breadcrumb'
 import ButtonLargeWithIcon from '@/components/button-large-with-icon'
 import { Heading } from '@/components/heading'
 import InputNumber from '@/components/input-number'
-import { Text, TextLink } from '@/components/text'
-import { TProductItem } from '@/data'
-import { StarIcon } from '@heroicons/react/24/solid'
+import { Text } from '@/components/text'
+import { formatPrice, getGemSpecs, TProductItem } from '@/data'
 import { ShoppingBag03Icon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
@@ -53,21 +52,21 @@ export function ProductForm({ product }: { product: TProductItem }) {
           <div className="rounded-full bg-zinc-900 px-5 py-2">
             <Text className="text-xs text-white">{product.vendor}</Text>
           </div>
-          <Text className="text-xl">${price.toFixed(2)}</Text>
-          <Text className="font-light text-zinc-400">/</Text>
-
-          {/* Reviews */}
-          <div className="flex items-center gap-1">
-            <span className="sr-only">4.94 rating</span>
-            <StarIcon className="size-5" />
-            <Text>4.94</Text>
-            <Text>·</Text>
-            <TextLink className="!capitalize underline" href={'#reviews'}>
-              172 reviews
-            </TextLink>
-          </div>
+          <Text className="text-xl">{formatPrice(price)}</Text>
         </div>
       </div>
+
+      {/* ---------- GEM SPECIFICATIONS ----------  */}
+      {product.gem ? (
+        <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-zinc-900/10 pt-8 sm:grid-cols-3">
+          {getGemSpecs(product.gem).map((spec) => (
+            <div key={spec.label}>
+              <dt className="text-xs text-zinc-500 uppercase">{spec.label}</dt>
+              <dd className="mt-0.5 text-sm text-zinc-900 uppercase">{spec.value}</dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
 
       {/* ---------- ADD TO CART FORM ----------  */}
       <form className="mt-10 block">
@@ -127,7 +126,11 @@ export function ProductForm({ product }: { product: TProductItem }) {
 
         {/* Add to cart button */}
         <div className="mt-14 flex flex-col gap-8">
-          <InputNumber className="gap-x-5" label="Qty" defaultValue={quantity} onChange={setQuantity} />
+          {product.gem ? (
+            <Text className="text-zinc-500">One of a kind</Text>
+          ) : (
+            <InputNumber className="gap-x-5" label="Qty" defaultValue={quantity} onChange={setQuantity} />
+          )}
           <ButtonLargeWithIcon
             icon={<HugeiconsIcon icon={ShoppingBag03Icon} size={20} color="currentColor" strokeWidth={1.5} />}
             onClick={() => openAside('cart')}

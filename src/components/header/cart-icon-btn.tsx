@@ -13,7 +13,7 @@ const CartIconBtn = () => {
       onClick={() => openAside('cart')}
     >
       <HugeiconsIcon icon={ShoppingBag03Icon} size={24} color="currentColor" strokeWidth={1} />
-      <span className="text-xs leading-none">(3)</span>
+      <span className="text-xs leading-none">(2)</span>
     </button>
   )
 }

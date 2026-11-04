@@ -14,7 +14,7 @@ export default function NewsletterSection({ className = '' }: NewsletterProps) {
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
         <div className="max-w-xl lg:col-span-7">
           <Heading bigger>
-            Want product <span data-slot="italic">news and updates?</span> Sign up for our newsletter.
+            Want gemstone <span data-slot="italic">news and updates?</span> Sign up for our newsletter.
           </Heading>
         </div>
 

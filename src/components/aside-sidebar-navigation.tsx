@@ -6,9 +6,12 @@ import { HugeiconsIcon } from '@hugeicons/react'
 import Aside from './aside'
 import { Text, TextLink } from './text'
 
-const demo_pages_menu = [
-  { name: 'Home', href: '/' },
-  { name: 'Coming soon', href: '#' },
+const stone_menu = [
+  { name: 'All gemstones', href: '/collections/page-style-2/all' },
+  { name: 'Blue sapphire', href: '/collections/page-style-2/blue-sapphire' },
+  { name: 'Pyrope garnet', href: '/collections/page-style-2/pyrope-garnet' },
+  { name: 'Tsavorite', href: '/collections/page-style-2/tsavorite' },
+  { name: 'Spessartine', href: '/collections/page-style-2/spessartine' },
 ]
 
 interface Props {
@@ -25,7 +28,7 @@ const AsideSidebarNavigation = ({ className }: Props) => {
             <div className="space-y-2 py-6">
               <Disclosure as="div" className="-mx-3">
                 <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 ps-3 pe-3.5 text-base/7 font-medium hover:bg-zinc-50">
-                  <Text>Home pages</Text>
+                  <Text>Gemstones</Text>
                   <HugeiconsIcon
                     className="group-data-open:rotate-180"
                     icon={ArrowDown01Icon}
@@ -34,7 +37,7 @@ const AsideSidebarNavigation = ({ className }: Props) => {
                   />
                 </DisclosureButton>
                 <DisclosurePanel className="ps-6 pe-3 pb-2">
-                  {demo_pages_menu.map((item) => (
+                  {stone_menu.map((item) => (
                     <DisclosureButton
                       key={item.name}
                       as={TextLink}

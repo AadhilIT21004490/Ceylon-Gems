@@ -1,11 +1,11 @@
 import Breadcrumb from '@/components/breadcrumb'
 import { Divider } from '@/components/divider'
 import { Heading } from '@/components/heading'
-import { Pagination, PaginationList, PaginationNext, PaginationPage, PaginationPrevious } from '@/components/pagination'
 import ProductCard from '@/components/product-card'
 import StarSvg from '@/components/star-svg'
 import { Text } from '@/components/text'
 import { getCollectionByHandle } from '@/data'
+import { filterAndSortGems } from '@/gem-filters'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import CategoryFilters1 from '../../category-filters-1'
@@ -24,13 +24,20 @@ export async function generateMetadata({ params }: { params: Promise<{ handle: s
   return { title, description }
 }
 
-export default async function Collection({ params }: { params: Promise<{ handle: string }> }) {
+export default async function Collection({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ handle: string }>
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
   const { handle } = await params
   const collection = await getCollectionByHandle(handle)
   if (!collection) {
     return redirect('/collections/page-style-2/all')
   }
-  const products = collection.products.slice(0, 6)
+  const gems = collection.products.filter((product) => product.gem)
+  const products = filterAndSortGems(gems, await searchParams)
   const breadcrumbs = [{ id: 1, name: 'Home', href: '/' }]
 
   return (
@@ -44,7 +51,7 @@ export default async function Collection({ params }: { params: Promise<{ handle:
           <div className="flex flex-col items-center py-14 text-center lg:py-20">
             <StarSvg />
             <Heading bigger level={1} className="mt-5">
-              <span data-slot="dim">Collection</span>
+              <span data-slot="dim">Explore</span>
               <br />
               <span data-slot="italic" className="underline">
                 {collection.title}
@@ -54,7 +61,9 @@ export default async function Collection({ params }: { params: Promise<{ handle:
           </div>
 
           <div className="flex justify-between gap-4">
-            <Text>{products.length} products</Text>
+            <Text>
+              {products.length} {products.length === 1 ? 'stone' : 'stones'}
+            </Text>
             <ProductSortDropdown align="right" />
           </div>
 
@@ -69,24 +78,18 @@ export default async function Collection({ params }: { params: Promise<{ handle:
                   Products
                 </h2>
 
-                <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-7 xl:grid-cols-3">
-                  {products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-                </div>
-
-                <Pagination className="mt-14 sm:mt-20">
-                  <PaginationPrevious href="?page=1" />
-                  <PaginationList>
-                    <PaginationPage href="?page=1" current>
-                      1
-                    </PaginationPage>
-                    <PaginationPage href="?page=2">2</PaginationPage>
-                    <PaginationPage href="?page=3">3</PaginationPage>
-                    <PaginationPage href="?page=4">4</PaginationPage>
-                  </PaginationList>
-                  <PaginationNext href="?page=3" />
-                </Pagination>
+                {products.length ? (
+                  <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:gap-x-7 xl:grid-cols-3">
+                    {products.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="py-16 text-center">
+                    <Text className="font-medium">No stones match your filters</Text>
+                    <Text className="mt-2 text-zinc-500">Try removing a filter to see more gemstones.</Text>
+                  </div>
+                )}
               </section>
             </div>
           </div>

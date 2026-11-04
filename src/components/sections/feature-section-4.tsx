@@ -1,4 +1,10 @@
-import { AiIdeaIcon, BoatIcon, CoinsDollarIcon, Mailbox01Icon, Plant03Icon } from '@hugeicons/core-free-icons'
+import {
+  CheckmarkBadge01Icon,
+  CreditCardIcon,
+  CustomerService01Icon,
+  DeliveryBox01Icon,
+  DiamondIcon,
+} from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
 import { Text } from '../text'
@@ -6,33 +12,33 @@ import { Text } from '../text'
 const data = [
   {
     id: 1,
-    title: 'DESIGNED TO LAST',
-    description: 'These designs will last in your wardrobe, forever.',
-    icon: AiIdeaIcon,
+    title: 'One of a kind',
+    description: 'Every natural gemstone is truly unique.',
+    icon: DiamondIcon,
   },
   {
     id: 2,
-    title: 'WORLDWIDE SHIPPING',
-    description: 'Cheap, Fast Shipping Available to your Destination.',
-    icon: BoatIcon,
+    title: 'Know your stone',
+    description: 'Carat, cut, origin and treatment are always listed.',
+    icon: CheckmarkBadge01Icon,
   },
   {
     id: 3,
-    title: '5 STAR CARE',
-    description: 'We\'re here for you anytime, <span class="underline">contact@bitpan.com',
-    icon: Mailbox01Icon,
+    title: 'Careful packing',
+    description: 'Each stone is securely packed for its journey to you.',
+    icon: DeliveryBox01Icon,
   },
   {
     id: 4,
-    title: 'SHOPPAY & AFTERPAY',
-    description: 'Pay in 4 installments, no interest. No fees, no interest.',
-    icon: CoinsDollarIcon,
+    title: 'Simple payment',
+    description: 'Pay by card or bank transfer at checkout.',
+    icon: CreditCardIcon,
   },
   {
     id: 5,
-    title: 'Kind to planet',
-    description: "you're doing good for yourself, and the planet.",
-    icon: Plant03Icon,
+    title: 'Here to help',
+    description: 'Questions about a stone? <a class="underline" href="/contact">Contact us</a>',
+    icon: CustomerService01Icon,
   },
 ]
 

@@ -9,9 +9,9 @@ import clsx from 'clsx'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Fashion',
+  title: 'Natural Gemstones',
   description:
-    'Discover the latest trends in fashion and style with our curated collection of clothing, accessories, and more.',
+    'Discover natural gemstones at Ceylon Lueur, with carat, cut, origin and treatment listed for every stone.',
 }
 
 export default async function Home() {

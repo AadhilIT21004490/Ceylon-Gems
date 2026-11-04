@@ -1,6 +1,6 @@
 'use client'
 
-import { TProductItem } from '@/data'
+import { formatPrice, TProductItem } from '@/data'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 import clsx from 'clsx'
@@ -46,7 +46,7 @@ export default function ProductCardHorizontal({ product, className, imageRatio =
             {title}
           </TextLink>
           <Text className="mt-0.5 text-xs text-zinc-500">{color ?? size ?? ''}</Text>
-          <Text className="mt-auto leading-tight sm:leading-6">${price.toFixed(2)}</Text>
+          <Text className="mt-auto leading-tight sm:leading-6">{formatPrice(price)}</Text>
         </div>
       </div>
 

@@ -12,24 +12,23 @@ interface TProductFaq {
 
 const faqs_demo = [
   {
-    question: 'TO CREATE MODEST FASHION THAT EMPOWERS',
-    answer: 'TO CREATE MODEST FASHION THAT EMPOWERS, INSPIRES, AND ELEVATES WOMEN AROUND THE WORLD.',
+    question: 'What does carat mean?',
+    answer:
+      'Carat measures a gemstone’s weight, not its size. One carat equals 0.2 grams, so stones of the same weight can look different in size depending on their cut.',
   },
   {
-    question: 'TO DESIGN TIMELESS PIECES',
-    answer: 'TO DESIGN TIMELESS PIECES THAT TRANSCEND TRENDS AND LIVE IN YOUR WARDROBE FOREVER.',
+    question: 'What does heat treatment mean?',
+    answer:
+      'Heating is a long-established way of improving a gemstone’s colour and clarity. It is common in sapphires, and the result is generally permanent.',
   },
   {
-    question: 'TO CHAMPION SUSTAINABLE PRACTICES',
-    answer: 'TO CHAMPION SUSTAINABLE PRACTICES, CRAFTING QUALITY THAT HONORS OUR PLANET.',
+    question: 'How do I choose the right stone?',
+    answer:
+      'Start with colour, as it usually matters most. Then compare clarity, cut and carat weight within your budget.',
   },
   {
-    question: 'TO BUILD A COMMUNITY ROOTED IN FAITH',
-    answer: 'TO BUILD A COMMUNITY ROOTED IN FAITH, SELF-LOVE, AND EMPOWERMENT.',
-  },
-  {
-    question: 'FASHION SHOULD BE MEANINGFUL',
-    answer: 'TO CREATE WITH PURPOSE, BECAUSE FASHION SHOULD BE MEANINGFUL, NOT DISPOSABLE.',
+    question: 'Can I ask about a specific stone?',
+    answer: 'Yes. Contact us with the name of the stone and we’ll be happy to help.',
   },
 ]
 

@@ -1,4 +1,4 @@
-import { TProductItem } from '@/data'
+import { formatPrice, TProductItem } from '@/data'
 import { ShoppingBagIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import Image from 'next/image'
@@ -11,7 +11,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product, className, imageRatio = 'aspect-3/4' }: ProductCardProps) {
-  const { id, title, price, featured_image, handle, images, tags, vendor, selected_options } = product
+  const { id, title, price, featured_image, handle, images, tags, vendor, selected_options, gem } = product
 
   // find the product color
   const color = selected_options.find((option) => option.name === 'Color')?.value
@@ -30,7 +30,7 @@ export default function ProductCard({ product, className, imageRatio = 'aspect-3
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 30vw"
           priority
         />
-        {images[1].src ? (
+        {images[1]?.src ? (
           <Image
             src={images[1] || '/placeholder.webp'}
             alt={title}
@@ -43,26 +43,28 @@ export default function ProductCard({ product, className, imageRatio = 'aspect-3
 
       {/* Category Label */}
       <div className="absolute top-3 left-3">
-        <div className="rounded-full bg-white px-3.5 py-1.5 text-xs leading-none text-zinc-900 uppercase">{vendor}</div>
+        <div className="rounded-full bg-white px-3.5 py-1.5 text-xs leading-none text-zinc-900 uppercase ring-1 ring-zinc-200">{vendor}</div>
       </div>
 
       {/* Shopping Bag Icon */}
       <div className="absolute top-3 right-3">
-        <div className="rounded-full bg-white p-1.5 text-zinc-500">
+        <div className="rounded-full bg-white p-1.5 text-zinc-500 ring-1 ring-zinc-200">
           <ShoppingBagIcon className="h-4 w-4" />
         </div>
       </div>
 
       {/* Product Info */}
       <div className="pt-3">
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-3">
           <TextLink href={`/products/${handle}`}>
             <span className="absolute inset-0"></span>
             {title}
           </TextLink>
-          <Text className="">${price.toFixed(2)}</Text>
+          <Text className="shrink-0">{formatPrice(price)}</Text>
         </div>
-        <Text className="mt-0.5 text-xs text-zinc-500">{color ?? size ?? ''}</Text>
+        <Text className="mt-0.5 text-xs text-zinc-500">
+          {gem ? `${gem.carat.toFixed(2)} ct · ${gem.shapeLabel}` : (color ?? size ?? '')}
+        </Text>
       </div>
     </div>
   )

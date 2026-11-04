@@ -76,7 +76,7 @@ const MegaMenuPopover = ({
             <div className="w-1/3 ps-8">
               <div className="relative aspect-16/9 w-full">
                 <Image
-                  src={rightImage?.src || '/images/hijab/feature-1-2.png'}
+                  src={rightImage?.src || '/images/fashion/blue.jpg'}
                   alt={rightImage?.alt || 'Featured product'}
                   fill
                   className="h-auto w-full object-cover object-top"

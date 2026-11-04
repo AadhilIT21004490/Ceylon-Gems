@@ -4,49 +4,14 @@ import { useAside } from '@/components/aside'
 import { Checkbox, CheckboxField, CheckboxGroup } from '@/components/checkbox'
 import { Fieldset, Label, Legend } from '@/components/fieldset'
 import { Text } from '@/components/text'
+import { gemFilters } from '@/gem-filters'
+import { useGemFilters } from '@/hooks/use-gem-filters'
 import { PlusSignIcon } from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@hugeicons/react'
 
-const filters = [
-  {
-    id: 'color',
-    name: 'Color',
-    options: [
-      { value: 'white', label: 'White', checked: true },
-      { value: 'beige', label: 'Beige' },
-      { value: 'blue', label: 'Blue' },
-      { value: 'brown', label: 'Brown' },
-      { value: 'green', label: 'Green' },
-      { value: 'purple', label: 'Purple' },
-    ],
-  },
-  {
-    id: 'category',
-    name: 'Category',
-    options: [
-      { value: 'new-arrivals', label: 'All New Arrivals' },
-      { value: 'tees', label: 'Tees' },
-      { value: 'crewnecks', label: 'Crewnecks' },
-      { value: 'sweatshirts', label: 'Sweatshirts' },
-      { value: 'pants-shorts', label: 'Pants & Shorts' },
-    ],
-  },
-  {
-    id: 'sizes',
-    name: 'Sizes',
-    options: [
-      { value: 'xs', label: 'XS' },
-      { value: 's', label: 'S' },
-      { value: 'm', label: 'M' },
-      { value: 'l', label: 'L' },
-      { value: 'xl', label: 'XL' },
-      { value: '2xl', label: '2XL' },
-    ],
-  },
-]
-
 const CategoryFilters1 = () => {
   const { open: openAside } = useAside()
+  const { isSelected, toggle, clear, hasSelection } = useGemFilters()
 
   return (
     <aside>
@@ -68,18 +33,29 @@ const CategoryFilters1 = () => {
       </button>
 
       <div className="hidden lg:block">
+        {hasSelection ? (
+          <button type="button" onClick={clear} className="mb-8 text-sm text-zinc-900 uppercase underline">
+            Clear all filters
+          </button>
+        ) : null}
+
         <form className="divide-y divide-gray-200">
-          {filters.map((section) => (
-            <div key={section.name} className="py-10 first:pt-0 last:pb-0">
+          {gemFilters.map((section) => (
+            <div key={section.id} className="py-8 first:pt-0 last:pb-0">
               <Fieldset>
                 <Legend className="block">
                   <Text className="font-medium">{section.name}</Text>
                 </Legend>
-                <div className="space-y-3 pt-6">
+                <div className="space-y-3 pt-5">
                   <CheckboxGroup>
-                    {section.options.map((option, optionIdx) => (
+                    {section.options.map((option) => (
                       <CheckboxField key={option.value}>
-                        <Checkbox name={`${section.id}[]`} value={option.value} defaultChecked={option.checked} />
+                        <Checkbox
+                          name={`${section.id}[]`}
+                          value={option.value}
+                          checked={isSelected(section.id, option.value)}
+                          onChange={() => toggle(section.id, option.value)}
+                        />
                         <Label>
                           <Text className="text-zinc-600">{option.label}</Text>
                         </Label>

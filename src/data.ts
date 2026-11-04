@@ -2,84 +2,39 @@ export async function getOrder(number: string) {
   return (await getOrders()).find((order) => order.number.toString() === number)
 }
 
+// Sample orders: replace with real customer orders once the store has a backend.
 export async function getOrders() {
+  const delivered = await getOrderItems(['emerald-cut-tsavorite-garnet'])
+  const shipped = await getCartProducts()
+
   return [
     {
-      number: '4376',
-      status: 'Delivered on January 08, 2028',
-      invoiceHref: '#',
-      products: [
-        {
-          id: 1,
-          name: 'Nomad Tumbler',
-          handle: 'leather-tote-bag',
-          description:
-            'This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.',
-          href: '#',
-          price: '35.00',
-          status: 'Preparing to ship',
-          step: 1,
-          date: 'March 24, 2021',
-          datetime: '2021-03-24',
-          address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
-          email: 'f•••@example.com',
-          phone: '1•••••••••40',
-          imageSrc: '/images/fashion/p1-1.jpg',
-          imageAlt: 'Insulated bottle with white base and black snap lid.',
-          quantity: 1,
-          size: 'M',
-          color: 'Black',
-        },
-      ],
+      number: '4657',
+      placedOn: 'October 28, 2026',
+      placedDatetime: '2026-10-28',
+      statusLabel: 'Shipped',
+      status: 'Shipped on October 30, 2026',
+      step: 2,
+      items: shipped,
+      totals: getOrderTotals(shipped, deliveryMethods[0].price),
+      address: ['Floyd Miles', 'Villa 12, Al Wasl Road', 'Dubai, United Arab Emirates'],
+      email: 'f•••@example.com',
+      phone: '+971 •• ••• ••40',
+      payment: { last4: '4242', expires: '02 / 29' },
     },
     {
-      number: '4657',
-      status: 'Delivered on January 11, 2025',
-      invoiceHref: '#',
-      products: [
-        {
-          id: 1,
-          name: 'Nomad Tumbler',
-          handle: 'leather-tote-bag',
-          description:
-            'This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.',
-          href: '#',
-          price: '35.00',
-          status: 'Preparing to ship',
-          step: 1,
-          date: 'March 24, 2021',
-          datetime: '2021-03-24',
-          address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
-          email: 'f•••@example.com',
-          phone: '1•••••••••40',
-          imageSrc: '/images/fashion/p2-1.jpg',
-          imageAlt: 'Insulated bottle with white base and black snap lid.',
-          quantity: 1,
-          size: 'XS',
-          color: 'Black Brown',
-        },
-        {
-          id: 2,
-          name: 'Minimalist Wristwatch',
-          handle: 'leather-tote-bag',
-          description: 'This contemporary wristwatch has a clean, minimalist look and high quality components.',
-          href: '#',
-          price: '149.00',
-          status: 'Shipped',
-          step: 0,
-          date: 'March 23, 2021',
-          datetime: '2021-03-23',
-          address: ['Floyd Miles', '7363 Cynthia Pass', 'Toronto, ON N3Y 4H8'],
-          email: 'f•••@example.com',
-          phone: '1•••••••••40',
-          imageSrc: '/images/fashion/p4-1.jpg',
-          imageAlt:
-            'Arm modeling wristwatch with black leather band, white watch face, thin watch hands, and fine time markings.',
-          quantity: 1,
-          size: 'XL',
-          color: 'White',
-        },
-      ],
+      number: '4376',
+      placedOn: 'August 14, 2026',
+      placedDatetime: '2026-08-14',
+      statusLabel: 'Delivered',
+      status: 'Delivered on August 18, 2026',
+      step: 3,
+      items: delivered,
+      totals: getOrderTotals(delivered, deliveryMethods[1].price),
+      address: ['Floyd Miles', 'Villa 12, Al Wasl Road', 'Dubai, United Arab Emirates'],
+      email: 'f•••@example.com',
+      phone: '+971 •• ••• ••40',
+      payment: { last4: '4242', expires: '02 / 29' },
     },
   ]
 }
@@ -433,45 +388,58 @@ export function getBlogPostsByHandle(handle: string) {
   }
 }
 
-export function getCartProducts() {
+// Sample delivery options: replace with your real courier services and prices.
+export const deliveryMethods = [
+  { id: 'tracked', title: 'Tracked Delivery', turnaround: '5–8 business days', price: 75 },
+  { id: 'express', title: 'Express Delivery', turnaround: '2–3 business days', price: 150 },
+]
+
+const VAT_RATE = 0.05
+
+export function getOrderTotals(items: { price: number }[], shipping: number) {
+  const subtotal = items.reduce((sum, item) => sum + item.price, 0)
+  const vat = Math.round((subtotal + shipping) * VAT_RATE * 100) / 100
+  return { subtotal, shipping, vat, total: subtotal + shipping + vat }
+}
+
+export function getGemSpecs(gem: NonNullable<TProductItem['gem']>) {
   return [
-    {
-      id: 1,
-      name: 'Basic Tee',
-      handle: 'leather-tote-bag',
-      price: '$32.00',
-      color: 'Sienna',
-      inStock: true,
-      size: 'Large',
-      imageSrc: '/images/skincare/face-1.webp',
-      imageAlt: "Front of men's Basic Tee in sienna.",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: 'Leather Tote Bag',
-      handle: 'leather-tote-bag',
-      price: '$32.00',
-      color: 'Black',
-      inStock: false,
-      leadTime: '3–4 weeks',
-      size: 'Large',
-      imageSrc: '/images/skincare/face-2.webp',
-      imageAlt: "Front of men's Basic Tee in black.",
-      quantity: 1,
-    },
-    {
-      id: 3,
-      name: 'Nomad Tumbler',
-      handle: 'nomad-tumbler',
-      price: '$35.00',
-      color: 'White',
-      inStock: true,
-     imageSrc: '/images/skincare/face-3.webp',
-      imageAlt: 'Insulated bottle with white base and black snap lid.',
-      quantity: 1,
-    },
+    { label: 'Carat', value: `${gem.carat.toFixed(2)} ct` },
+    { label: 'Cut', value: gem.shapeLabel },
+    { label: 'Color', value: gem.colorLabel },
+    { label: 'Origin', value: gem.originLabel },
+    { label: 'Treatment', value: gem.treatmentLabel },
   ]
+}
+
+async function getOrderItems(handles: string[]) {
+  const gems = await getGemProducts()
+
+  return handles.flatMap((handle) => {
+    const product = gems.find((item) => item.handle === handle)
+    if (!product?.gem) return []
+    const { gem } = product
+
+    return [
+      {
+        id: product.id,
+        name: product.title,
+        handle: product.handle,
+        type: gem.type,
+        price: product.price,
+        imageSrc: product.images[0].src,
+        imageAlt: product.images[0].alt,
+        specs: getGemSpecs(gem),
+      },
+    ]
+  })
+}
+
+export type TOrderItem = Awaited<ReturnType<typeof getOrderItems>>[number]
+
+// Sample cart: replace with the customer's real cart once the store has a backend.
+export async function getCartProducts() {
+  return getOrderItems(['oval-ceylon-sapphire', 'cushion-pyrope-garnet'])
 }
 
 // ------------------------ SKINCARE DATA ------------------------
@@ -667,44 +635,44 @@ export async function getHijabGroupCollections() {
 // ------------------------ FASHION DATA ------------------------
 // ------------------------ FASHION DATA ------------------------
 export async function getFashionCollections() {
-  const products = await getFashionProducts()
+  const gems = await getGemProducts()
+  const byVariety = (variety: string) => gems.filter((product) => product.gem?.variety === variety)
   return [
     {
       id: '1',
       title: 'Pyrope Garnet',
-      handle: 'jackets',
-      description:
-        'Stylish jackets for every occasion, from casual to formal. Explore our collection of trendy jackets that elevate your outfit.',
+      handle: 'pyrope-garnet',
+      description: 'Deep, fiery red garnets prized for their rich colour and lively sparkle.',
       updatedAt: '2025-05-06T10:00:00-04:00',
       image: '/images/fashion/pyrope.jpg',
-      products: products.slice(0, 5),
+      products: byVariety('pyrope-garnet'),
     },
     {
       id: '2',
       title: 'Tsavorite',
-      handle: 't-shirts',
-      description: 'Casual t-shirts for everyday wear, combining comfort and style effortlessly. Find your fit.',
+      handle: 'tsavorite',
+      description: 'A vivid green variety of garnet, admired for its brilliance and rarity.',
       updatedAt: '2025-05-06T10:00:00-04:00',
       image: '/images/fashion/tsavo.jpg',
-      products: products.slice(5, 10),
+      products: byVariety('tsavorite'),
     },
     {
       id: '3',
-      title: 'Spessertaine',
-      handle: 'jeans',
-      description: 'Trendy jeans for a casual yet stylish look. Perfect for any occasion. Find your fit.',
+      title: 'Spessartine',
+      handle: 'spessartine',
+      description: 'Glowing orange garnets with a warm, radiant colour.',
       updatedAt: '2025-05-06T10:00:00-04:00',
       image: '/images/fashion/spess.jpg',
-      products: products.slice(2, 7),
+      products: byVariety('spessartine'),
     },
     {
       id: '4',
       title: 'Blue Sapphire',
-      handle: 'coats',
-      description: 'Elegant coats for every season, combining warmth and style. Find your perfect outerwear.',
+      handle: 'blue-sapphire',
+      description: 'A timeless favourite, celebrated for its deep blue colour and lasting brilliance.',
       updatedAt: '2025-05-06T10:00:00-04:00',
       image: '/images/fashion/blue.jpg',
-      products: products.slice(1, 6),
+      products: byVariety('blue-sapphire'),
     },
   ]
 }
@@ -787,13 +755,13 @@ export async function getCollectionByHandle(handle: string) {
   if (handle === 'all') {
     return {
       id: 'gid://0',
-      title: 'All Products',
+      title: 'All Gemstones',
       handle: '/all',
       description:
-        'Discover our complete range of skincare, haircare, and body care products. Find the perfect product for your needs.',
+        'Browse our full selection of natural gemstones. Filter by type, cut, carat, colour, origin and treatment to find your perfect stone.',
       updatedAt: '2025-05-06T10:00:00-04:00',
-      image: '/images/skincare/c1.webp',
-      products: (await getProducts()).slice(0, 8),
+      image: '/images/fashion/blue.jpg',
+      products: await getGemProducts(),
     }
   }
   const allCollections = await getCollections('all')
@@ -1949,7 +1917,124 @@ export async function getProducts() {
       ],
       collections: [{ title: 'Modest Elegance', id: 2003, handle: 'modest-elegance' }],
     },
+    // Sample stones: replace the prices and gem details with your real stock.
+    {
+      id: 9001,
+      title: 'Oval Ceylon Sapphire',
+      handle: 'oval-ceylon-sapphire',
+      vendor: 'Sapphire',
+      tags: ['Gemstone'],
+      price: 6800,
+      images: [{ src: '/images/fashion/blue.jpg', width: 800, height: 800, alt: 'Oval blue sapphire' }],
+      featured_image: { src: '/images/fashion/blue.jpg', width: 800, height: 800, alt: 'Oval blue sapphire' },
+      options: [],
+      selected_options: [{ name: 'Color', value: 'Blue' }],
+      collections: [{ title: 'Gemstones', id: 2004, handle: 'gemstones' }],
+      gem: {
+        variety: 'blue-sapphire',
+        description: 'An oval sapphire with a rich, even blue colour. Sapphires are among the hardest natural gemstones, which makes them a lasting choice for jewellery.',
+        colorLabel: 'Blue',
+        originLabel: 'Ceylon (Sri Lanka)',
+        treatmentLabel: 'Heated',
+        type: 'sapphire',
+        shape: 'oval',
+        shapeLabel: 'Oval',
+        carat: 1.25,
+        color: 'blue',
+        origin: ['ceylon'],
+        treatment: 'heated',
+      },
+    },
+    {
+      id: 9002,
+      title: 'Cushion Pyrope Garnet',
+      handle: 'cushion-pyrope-garnet',
+      vendor: 'Garnet',
+      tags: ['Gemstone'],
+      price: 3800,
+      images: [{ src: '/images/fashion/pyrope.jpg', width: 800, height: 800, alt: 'Cushion cut pyrope garnet' }],
+      featured_image: { src: '/images/fashion/pyrope.jpg', width: 800, height: 800, alt: 'Cushion cut pyrope garnet' },
+      options: [],
+      selected_options: [{ name: 'Color', value: 'Red' }],
+      collections: [{ title: 'Gemstones', id: 2004, handle: 'gemstones' }],
+      gem: {
+        variety: 'pyrope-garnet',
+        description: 'A cushion cut pyrope garnet with a deep, fiery red colour and bright, lively facets. A striking centre stone with plenty of presence.',
+        colorLabel: 'Red',
+        originLabel: 'Ceylon (Sri Lanka)',
+        treatmentLabel: 'Untreated',
+        type: 'garnet',
+        shape: 'cushion',
+        shapeLabel: 'Cushion',
+        carat: 5.2,
+        color: 'red',
+        origin: ['ceylon', 'untreated'],
+        treatment: 'untreated',
+      },
+    },
+    {
+      id: 9003,
+      title: 'Emerald Cut Tsavorite Garnet',
+      handle: 'emerald-cut-tsavorite-garnet',
+      vendor: 'Garnet',
+      tags: ['Gemstone'],
+      price: 12500,
+      images: [{ src: '/images/fashion/tsavo.jpg', width: 1995, height: 1995, alt: 'Emerald cut tsavorite garnet' }],
+      featured_image: { src: '/images/fashion/tsavo.jpg', width: 1995, height: 1995, alt: 'Emerald cut tsavorite garnet' },
+      options: [],
+      selected_options: [{ name: 'Color', value: 'Green' }],
+      collections: [{ title: 'Gemstones', id: 2004, handle: 'gemstones' }],
+      gem: {
+        variety: 'tsavorite',
+        description: 'An emerald cut tsavorite, the vivid green variety of garnet. Its saturated colour and brilliance make it a favourite among gem collectors.',
+        colorLabel: 'Green',
+        originLabel: 'Tanzania',
+        treatmentLabel: 'Untreated',
+        type: 'garnet',
+        shape: 'emerald-cut',
+        shapeLabel: 'Emerald Cut',
+        carat: 2.4,
+        color: 'green',
+        origin: ['other', 'untreated'],
+        treatment: 'untreated',
+      },
+    },
+    {
+      id: 9004,
+      title: 'Oval Spessartine Garnet',
+      handle: 'oval-spessartine-garnet',
+      vendor: 'Garnet',
+      tags: ['Gemstone'],
+      price: 850,
+      images: [{ src: '/images/fashion/spess.jpg', width: 1000, height: 1000, alt: 'Oval spessartine garnet' }],
+      featured_image: { src: '/images/fashion/spess.jpg', width: 1000, height: 1000, alt: 'Oval spessartine garnet' },
+      options: [],
+      selected_options: [{ name: 'Color', value: 'Orange' }],
+      collections: [{ title: 'Gemstones', id: 2004, handle: 'gemstones' }],
+      gem: {
+        variety: 'spessartine',
+        description: 'An oval spessartine garnet with a warm, glowing orange colour. An eye-catching stone that brings energy to any design.',
+        colorLabel: 'Orange',
+        originLabel: 'Namibia',
+        treatmentLabel: 'Untreated',
+        type: 'garnet',
+        shape: 'oval',
+        shapeLabel: 'Oval',
+        carat: 0.95,
+        color: 'orange',
+        origin: ['other', 'untreated'],
+        treatment: 'untreated',
+      },
+    },
   ]
+}
+export async function getGemProducts() {
+  const allProducts = await getProducts()
+  return allProducts.filter((product) => product.gem)
+}
+export function formatPrice(price: number) {
+  const minimumFractionDigits = Number.isInteger(price) ? 0 : 2
+  return `AED ${price.toLocaleString('en-US', { minimumFractionDigits, maximumFractionDigits: 2 })}`
 }
 export async function getSkincareProducts() {
   const allProducts = await getProducts()
@@ -1975,7 +2060,7 @@ export async function getProductByHandle(handle: string) {
   }
   return {
     ...product,
-    description: 'lorem ipsum dolor...',
+    description: product.gem?.description ?? 'lorem ipsum dolor...',
   }
 }
 
