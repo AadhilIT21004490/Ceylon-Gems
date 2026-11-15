@@ -34,7 +34,7 @@ const SLIDES: Slide[] = [
       'Where we craft exceptional pieces that celebrate the natural beauty and cultural heritage of our island.',
   },
   {
-    image: '/images/fashion/pyrope.jpg',
+    image: '/images/fashion/hr2.png',
     eyebrow: 'Rare Garnets',
     title: (
       <>
@@ -44,7 +44,7 @@ const SLIDES: Slide[] = [
     description: 'Deep, radiant pyrope garnets — hand-selected for colour, clarity and brilliance.',
   },
   {
-    image: '/images/fashion/tsavo.jpg',
+    image: '/images/fashion/hr3.jpg',
     eyebrow: 'Ethically Sourced',
     title: (
       <>
