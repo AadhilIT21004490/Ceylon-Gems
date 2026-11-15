@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html
       lang="en"
       className={clsx(
-        'text-zinc-950 antialiased dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950',
+        'text-cyprus antialiased dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950',
         dm_sans.variable,
         playfair_display.variable
       )}

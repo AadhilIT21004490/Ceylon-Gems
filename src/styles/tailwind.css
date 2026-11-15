@@ -7,6 +7,10 @@
   --font-sans: 'DM sans', sans-serif;
   --font-serif: 'Playfair Display', serif;
   --font-sans--font-feature-settings: 'cv11';
+
+  /* Brand colours */
+  --color-cyprus: #004741;
+  --color-sand: #f0ede4;
 }
 
 @utility container {

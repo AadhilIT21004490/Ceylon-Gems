@@ -33,7 +33,7 @@ const MegaMenuPopover = ({
 
       <PopoverPanel
         transition
-        className="bitpan-popover-full-panel absolute inset-x-0 top-0 -z-10 bg-white pt-[5.1rem] text-zinc-950 shadow-xl transition data-closed:-translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-zinc-800 dark:text-zinc-100"
+        className="bitpan-popover-full-panel absolute inset-x-0 top-0 -z-10 bg-sand pt-[5.1rem] text-cyprus shadow-xl transition data-closed:-translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-zinc-800 dark:text-zinc-100"
       >
         <div className="flex justify-between gap-x-8 px-8 py-10 2xl:container dark:border-white/10">
           <div className="flex max-w-xl flex-wrap gap-x-[clamp(1.5rem,5vw,5rem)] gap-y-8">
@@ -46,7 +46,7 @@ const MegaMenuPopover = ({
                       <li key={index}>
                         <TextLink
                           href={item.href}
-                          className="text-sm/6 text-zinc-600 uppercase hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50"
+                          className="text-sm/6 text-cyprus/70 uppercase hover:text-cyprus dark:text-zinc-300 dark:hover:text-zinc-50"
                         >
                           {item.name}
                         </TextLink>

@@ -15,7 +15,7 @@ const SearchIconPopover = () => {
 
       <PopoverPanel
         transition
-        className="bitpan-popover-full-panel absolute inset-x-0 top-0 -z-10 bg-white pt-[5.1rem] text-zinc-950 shadow-xl transition data-closed:-translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-100 data-leave:ease-in dark:bg-zinc-800 dark:text-zinc-100"
+        className="bitpan-popover-full-panel absolute inset-x-0 top-0 -z-10 bg-sand pt-[5.1rem] text-cyprus shadow-xl transition data-closed:-translate-y-1 data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-100 data-leave:ease-in dark:bg-zinc-800 dark:text-zinc-100"
       >
         <div className="container flex justify-center py-4">
           <div className="flex w-full max-w-xl flex-col">

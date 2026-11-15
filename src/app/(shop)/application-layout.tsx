@@ -23,7 +23,7 @@ const ApplicationLayout: React.FC<ComponentProps> = ({ children, header, footer 
       <FeatureSection4 className="container mt-16 sm:mt-28 lg:mt-40" />
 
       {/* FOOTER */}
-      {footer ? footer : <Footer className="container mt-16 sm:mt-28 lg:mt-32" />}
+      {footer ? footer : <Footer className="mt-16 sm:mt-28 lg:mt-32" />}
 
       {/* ASIDES */}
       <AsideSidebarNavigation />

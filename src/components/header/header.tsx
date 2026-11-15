@@ -61,15 +61,17 @@ const Header = async ({ className, hasBottomBorder = true, variant = 'default', 
       className={clsx(
         className,
         'group z-10 w-full',
-        variant === 'default' && 'relative',
+        variant === 'default' &&
+          'relative bg-cyprus text-sand has-[.bitpan-popover-full-panel]:text-cyprus',
         variant === 'bg-transparent-text-white' &&
-          'absolute inset-x-0 top-0 bg-transparent text-white transition-colors duration-300 has-[.bitpan-popover-full-panel]:text-zinc-950'
+          'absolute inset-x-0 top-0 bg-transparent text-white transition-colors duration-300 has-[.bitpan-popover-full-panel]:text-cyprus'
       )}
     >
       <nav aria-label="Global" className="container">
         <div
           className={clsx(
-            'flex items-center justify-between border-zinc-950/10 py-6 dark:border-white/10',
+            'flex items-center justify-between py-6',
+            variant === 'default' ? 'border-sand/15 has-[.bitpan-popover-full-panel]:border-cyprus/10' : 'border-white/20 has-[.bitpan-popover-full-panel]:border-cyprus/10',
             hasBottomBorder && 'border-b',
             !hasBottomBorder && 'has-[.bitpan-popover-full-panel]:border-b'
           )}

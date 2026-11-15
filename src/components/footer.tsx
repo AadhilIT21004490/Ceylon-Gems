@@ -82,77 +82,79 @@ interface FooterProps {
 
 export default function Footer({ className }: FooterProps) {
   return (
-    <footer className={clsx('bg-white pb-8', className)}>
-      <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-        <Logo />
-        <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-          <div className="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <Text className="text-sm/6 font-medium">Shop</Text>
-              <ul role="list" className="mt-6 space-y-4">
-                {navigation.shop.map((item) => (
-                  <li key={item.name}>
-                    <Link href={item.href} className="text-sm/6 text-zinc-600 uppercase hover:text-zinc-900">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+    <footer className={clsx('bg-cyprus text-sand', className)}>
+      <div className="container pt-16 pb-8 sm:pt-20">
+        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+          <Logo />
+          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              <div>
+                <Text className="text-sm/6 font-medium">Shop</Text>
+                <ul role="list" className="mt-6 space-y-4">
+                  {navigation.shop.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-sm/6 text-sand/70 uppercase transition-colors hover:text-sand">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-10 md:mt-0">
+                <Text className="text-sm/6 font-medium">Support</Text>
+                <ul role="list" className="mt-6 space-y-4">
+                  {navigation.support.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-sm/6 text-sand/70 uppercase transition-colors hover:text-sand">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="mt-10 md:mt-0">
-              <Text className="text-sm/6 font-medium">Support</Text>
-              <ul role="list" className="mt-6 space-y-4">
-                {navigation.support.map((item) => (
-                  <li key={item.name}>
-                    <Link href={item.href} className="text-sm/6 text-zinc-600 uppercase hover:text-zinc-900">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <Text className="text-sm/6 font-medium">Company</Text>
-              <ul role="list" className="mt-6 space-y-4">
-                {navigation.company.map((item) => (
-                  <li key={item.name}>
-                    <Link href={item.href} className="text-sm/6 text-zinc-600 uppercase hover:text-zinc-900">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="mt-10 md:mt-0">
-              <Text className="text-sm/6 font-medium">Legal</Text>
-              <ul role="list" className="mt-6 space-y-4">
-                {navigation.legal.map((item) => (
-                  <li key={item.name}>
-                    <Link href={item.href} className="text-sm/6 text-zinc-600 uppercase hover:text-zinc-900">
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="md:grid md:grid-cols-2 md:gap-8">
+              <div>
+                <Text className="text-sm/6 font-medium">Company</Text>
+                <ul role="list" className="mt-6 space-y-4">
+                  {navigation.company.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-sm/6 text-sand/70 uppercase transition-colors hover:text-sand">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-10 md:mt-0">
+                <Text className="text-sm/6 font-medium">Legal</Text>
+                <ul role="list" className="mt-6 space-y-4">
+                  {navigation.legal.map((item) => (
+                    <li key={item.name}>
+                      <Link href={item.href} className="text-sm/6 text-sand/70 uppercase transition-colors hover:text-sand">
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="mt-10 border-t border-zinc-900/10 pt-8 md:flex md:items-center md:justify-between">
-        <div className="flex gap-x-6 md:order-2">
-          {navigation.social.map((item) => (
-            <Link key={item.name} href={item.href} className="text-zinc-600 hover:text-zinc-800">
-              <span className="sr-only">{item.name}</span>
-              <item.icon aria-hidden="true" className="size-6" />
-            </Link>
-          ))}
+        <div className="mt-10 border-t border-sand/15 pt-8 md:flex md:items-center md:justify-between">
+          <div className="flex gap-x-6 md:order-2">
+            {navigation.social.map((item) => (
+              <Link key={item.name} href={item.href} className="text-sand/70 transition-colors hover:text-sand">
+                <span className="sr-only">{item.name}</span>
+                <item.icon aria-hidden="true" className="size-6" />
+              </Link>
+            ))}
+          </div>
+          <Text className="mt-8 text-sm/6 text-sand/70 md:order-1 md:mt-0">
+            &copy; {new Date().getFullYear()} Ceylon Lueur. All rights reserved.
+          </Text>
         </div>
-        <Text className="mt-8 text-sm/6 text-zinc-600 md:order-1 md:mt-0">
-          &copy; {new Date().getFullYear()} Ceylon Lueur. All rights reserved.
-        </Text>
       </div>
     </footer>
   )
